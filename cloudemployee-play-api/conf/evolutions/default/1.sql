@@ -3,18 +3,18 @@
 
 # --- !Ups
 
-create table employee (
+create table customer (
   id                            bigint not null,
   name                          varchar(255),
   duetime                       timestamp,
   jointime                      timestamp,
-  constraint pk_employee primary key (id)
+  constraint pk_customer primary key (id)
 );
-create sequence employee_seq;
+create sequence customer_seq;
 
 
 # --- !Downs
 
-drop table if exists employee;
-drop sequence if exists employee_seq;
+drop table if exists customer;
+drop sequence if exists customer_seq;
 

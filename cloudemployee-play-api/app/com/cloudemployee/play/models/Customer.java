@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @author © tdelacerna <teodoro.delacerna@fsoft.com.vn>
  */
 @Entity
-public class Employee implements Serializable, Comparable<Employee>{
+public class Customer implements Serializable, Comparable<Customer>{
 	
 	@Id
 	private long id;
@@ -65,7 +65,7 @@ public class Employee implements Serializable, Comparable<Employee>{
 	}
 
 	@Override
-	public int compareTo(Employee customer) {
+	public int compareTo(Customer customer) {
 		DateTime thisDueDate = this.getDuetime();
 		DateTime otherDueDate = customer.getDuetime();
 		

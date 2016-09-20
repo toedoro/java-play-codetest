@@ -10,8 +10,8 @@ import java.util.concurrent.CompletionStage;
 
 import javax.inject.Inject;
 
-import com.cloudemployee.play.models.Employee;
-import com.cloudemployee.play.service.EmployeeService;
+import com.cloudemployee.play.models.Customer;
+import com.cloudemployee.play.service.CustomerService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,15 +27,15 @@ import play.mvc.Result;
  * 
  * @author © tdelacerna <teodoro.delacerna@fsoft.com.vn>
  */
-public class EmployeeController extends Controller{
+public class CustomerController extends Controller{
 	
 	@Inject
-	EmployeeService service;
+	CustomerService service;
 	
 	@Inject HttpExecutionContext ec;
 	
 	@BodyParser.Of(BodyParser.Json.class)
-	public CompletionStage<Result> sortEmployee() {
+	public CompletionStage<Result> sortCustomers() {
 		try{
 			ObjectMapper objectMapper = new ObjectMapper();
 			objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -47,14 +47,14 @@ public class EmployeeController extends Controller{
 			String jsonString = nodes.toString();
 			return CompletableFuture.supplyAsync(() ->{
 					try {
-						List<Employee> employees = objectMapper.readValue(jsonString, objectMapper.getTypeFactory().constructCollectionType(List.class, Employee.class));
-						service.sort(employees);
+						List<Customer> customers = objectMapper.readValue(jsonString, objectMapper.getTypeFactory().constructCollectionType(List.class, Customer.class));
+						service.sort(customers);
 						
-						return employees;
+						return customers;
 					} catch (IOException e) {
 						throw new IllegalStateException(e.getMessage(),e);
 					}
-				}).thenApply(employees -> ok( Json.toJson(employees) ) );
+				}).thenApply(customers -> ok( Json.toJson(customers) ) );
 		}catch(Exception ex ){
 			throw new IllegalStateException(ex.getMessage(), ex);
 		}
