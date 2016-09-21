@@ -7,4 +7,6 @@
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
-POST /customers/sort				com.cloudemployee.play.controllers.CustomerController.sortCustomers
+POST /customers				com.cloudemployee.play.controllers.CustomerController.getCustomers
+
+POST /customers/preview		com.cloudemployee.play.controllers.CustomerController.previewCustomers
